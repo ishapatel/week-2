@@ -3,10 +3,10 @@ import pyorient
 import sys
 
 client = pyorient.OrientDB("localhost", 2424)
-session_id = client.connect("root", "admin")
+session_id = client.connect("root", "R0n+H3rm10n3")
 db_name = "soufun"
-db_username = "admin"
-db_password = "admin"
+db_username = "root"
+db_password = "R0n+H3rm10n3"
 
 if client.db_exists( db_name, pyorient.STORAGE_TYPE_MEMORY ):
 	client.db_open( db_name, db_username, db_password )
@@ -36,29 +36,32 @@ print 'received ' + str(numListings) + ' records'
 # then test each price to see if it is smaller than the current minimum. If it is, update 
 # the minimum variable with that price. You can do something similar to find the maximum.
 
+ini_min = 900  
+ini_max = 0
+sum_rec = 0
+
 for record in records:
 	print record.price
-	ini_min = 900  
-	ini_max = 0
-	avg_price = sum(records)/len(records)
-	if record < ini_min:
-	    min_price = record
+	sum_rec += records.price
+	avg_price = sum_rec/len(records)
+	if record.price < ini_min:
+	    min_price = records.price
 	    ini_min = min_price
 	else:
 	   min_price = ini_min
-	if record < ini_min:
-	    min_price = record
+	if record.price < ini_min:
+	    min_price = records.price
 	    ini_min = min_price
 	else:
 	    min_price = ini_min   
-	 
+	    	 
 	       
 
 
 # [PRINT OUT THE RESULTING VALUES BY CONCATENATING THEM TO THESE LINES TO CHECK YOUR WORK]
 
-print 'min price: ' + min_price
-print 'max price: ' + max_price
-print 'average price: ' + avg_price
+print 'min price: ' + str(min_price)
+print 'max price: ' + str(max_price)
+print 'average price: ' + str(avg_price)
 
 client.db_close()
