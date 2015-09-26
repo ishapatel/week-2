@@ -4,7 +4,7 @@ import sys
 
 client = pyorient.OrientDB("localhost", 2424)
 session_id = client.connect("root", "R0n+H3rm10n3")
-db_name = "soufun"
+db_name = "soufun2"
 db_username = "root"
 db_password = "R0n+H3rm10n3"
 
@@ -42,18 +42,18 @@ sum_rec = 0
 
 for record in records:
 	print record.price
-	sum_rec += records.price
+	sum_rec += record.price
 	avg_price = sum_rec/len(records)
 	if record.price < ini_min:
-	    min_price = records.price
+	    min_price = record.price
 	    ini_min = min_price
 	else:
 	   min_price = ini_min
-	if record.price < ini_min:
-	    min_price = records.price
-	    ini_min = min_price
+	if record.price > ini_max:
+	    max_price = record.price
+	    ini_max = max_price
 	else:
-	    min_price = ini_min   
+	    max_price = ini_max   
 	    	 
 	       
 
